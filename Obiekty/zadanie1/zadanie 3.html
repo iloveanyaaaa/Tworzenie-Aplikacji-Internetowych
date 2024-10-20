@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>title</title>
+</head>
+<body>
+    <script>
+        const book ={
+    title: " title",
+    author: " author",
+    pagecount: " pagecount",
+    publisher: " wydawnictwo",
+    
+    showDetails(){
+        console.log("For-in loop:");
+        for (let key in this) {
+          if (typeof this[key] !== 'function') {
+            console.log(`${key}: ${this[key]}`);
+          }
+        }
+    
+        console.log("\nObject.keys:");
+        Object.keys(this).forEach(key => {
+          if (typeof this[key] !== 'function') {
+            console.log(`${key}: ${this[key]}`);
+          }
+        });
+    
+        console.log("\nObject.values:");
+        Object.values(this).forEach(value => {
+          if (typeof value !== 'function') {
+            console.log(value);
+          }
+        });
+    
+        console.log("\nObject.entries:");
+        Object.entries(this).forEach(([key, value]) => {
+          if (typeof value !== 'function') {
+            console.log(`${key}: ${value}`);
+          }
+        });
+      }
+    };
+    book.showDetails();
+
+
+    </script>
+</body>
+</html>

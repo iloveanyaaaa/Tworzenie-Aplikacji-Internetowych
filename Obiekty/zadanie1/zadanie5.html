@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>zadania 5</title>
+</head>
+<body>
+    <script>
+        const book = {
+    users: [],
+
+    addUser(name, age, phone) {
+        const user = { name, age, phone };
+        this.users.push(user);
+    },
+
+    showUsers() {
+        console.log("użytkownicy w książce:");
+        for (const user of this.users) {
+            console.log(user);
+        }
+    },
+
+    findByName(name) {
+        const user = this.users.find(user => user.name === name);
+        console.log(user ? user : false);
+    },
+
+    findByPhone(phone) {
+        const user = this.users.find(user => user.phone === phone);
+        console.log(user ? user : false);
+    },
+
+    getCount() {
+        console.log(this.users.length);
+    }
+};
+
+
+book.addUser("Jan Kowalski", 30, "123-456-789");
+book.addUser("Anna Nowak", 25, "987-654-321");
+book.showUsers();
+book.findByName("Jan Kowalski");
+book.findByPhone("987-654-321"); 
+book.getCount(); 
+
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+
+
+
+
+</body>
+</html>

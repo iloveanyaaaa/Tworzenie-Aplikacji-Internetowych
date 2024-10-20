@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>zadanie 1</title>
+</head>
+<body>
+<script type="text/javascript">
+	class User {
+  constructor(nick, name, surname, email, role) {
+    this.nick = nick;
+    this.name = name;
+    this.surname = surname;
+    this.email = email;
+    this.role = role;
+    this.loginDates = [];
+    this.active = true;
+  }
+
+  logIn() {
+    const date = new Intl.DateTimeFormat('pl-PL', { dateStyle: 'full', timeStyle: 'long' }).format(new Date());
+    this.loginDates.push(date);
+  }
+
+  showLoginDates() {
+    this.loginDates.forEach(date => console.log(date));
+  }
+
+  showDetails() {
+    for (let key in this) {
+      if (this.hasOwnProperty(key)) {
+        console.log(`${key}: ${this[key]}`);
+      }
+    }
+  }
+
+  toggleActive() {
+    this.active = !this.active;
+  }
+}
+
+
+const users = [
+  new User('user1', 'Anna', 'Nowak', 'anna@mail.com', 'admin'),
+  new User('user2', 'Dawid', 'Wójcik', 'dawid@mail.com', 'editor'),
+  new User('user3', 'hubert', 'Kowalski', 'hubert@mail.com', 'reader')
+];
+
+
+users[0].logIn();
+users[0].logIn();
+users[0].showLoginDates();
+
+users[1].showDetails();
+users[1].toggleActive();
+console.log(users[1].active);
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

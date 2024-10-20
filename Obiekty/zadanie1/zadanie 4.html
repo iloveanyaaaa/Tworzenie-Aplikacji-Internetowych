@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>zadanie 4</title>
+</head>
+<body>
+    <script>
+       const spaceShip = {
+    name: "Enterprise",
+    currentLocation: "Earth",
+    flyDistance: 0,
+  
+   
+    flyTo(place, distance) {
+      this.currentLocation = place;
+      this.flyDistance += distance;
+    },
+  
+
+    showInfo() {
+      console.log(`Informacje o statku:\n----\nStatek ${this.name}\ndoleciał do miejsca ${this.currentLocation}.\nStatek przeleciał już całkowity dystans ${this.flyDistance} km.`);
+    },
+  
+
+    meetClingon() {
+      let successCount = 0;
+  
+
+      for (let i = 0; i < 100; i++) {
+        let randomValue = Math.random();
+        if (randomValue > 0.5) {
+          successCount++; 
+        }
+      }
+  
+    
+      if (successCount >= 50) {
+        console.log(`Statek ${this.name} będący w okolicy ${this.currentLocation} zwycięsko wyszedł ze spotkania z Klingonami.`);
+      } else {
+        console.warn(`Statek ${this.name} będący w okolicy ${this.currentLocation} został pokonany przez Klingonów.`);
+      }
+    }
+  };
+  
+  spaceShip.meetClingon();
+
+
+
+
+        </script>
+    
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>zadanie 6</title>
+</head>
+<body>
+    <script>
+ const tableGenerator = {
+    randomNumber(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    },
+
+    generateIncTable(nr) {
+        return Array.from({ length: nr + 1 }, (_, i) => i);
+    },
+
+    generateRandomTable(lng, min, max) {
+        return Array.from({ length: lng }, () => this.randomNumber(min, max));
+    },
+
+    generateTableFromText(str) {
+        if (typeof str !== 'string') {
+            return [];
+        }
+        return str.split(' ').filter(word => word.length > 0);
+    },
+
+    getMaxFromTable(arr) {
+        return Math.max(...arr);
+    },
+
+    getMinFromTable(arr) {
+        return Math.min(...arr);
+    },
+
+    delete(arr, index) {
+        if (index >= 0 && index < arr.length) {
+            arr.splice(index, 1);
+        }
+    }
+};
+
+
+console.log(tableGenerator.randomNumber(1, 10)); 
+console.log(tableGenerator.generateIncTable(5)); 
+console.log(tableGenerator.generateRandomTable(4, 1, 55));
+console.log(tableGenerator.generateTableFromText("tekst")); 
+console.log(tableGenerator.getMaxFromTable([1, 2, 3, 4, 5])); 
+console.log(tableGenerator.getMinFromTable([1, 2, 3, 4, 5])); 
+
+const arr = [10, 20, 30, 40, 50];
+tableGenerator.delete(arr, 2); 
+console.log(arr);
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+</html>

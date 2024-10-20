@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>zadanie2</title>
+</head>
+<body>
+	<script type="text/javascript">
+		
+class Fighter {
+  constructor(name, live = 20, power = 3) {
+    this.name = name;
+    this.live = live;
+    this.power = power;
+  }
+
+  attack(who) {
+    if (Math.random() < 0.5) {
+      who.live -= this.power;
+      log.push(`${this.name} zaatakował ${who.name}. ${who.name} ma teraz ${who.live} życia.`);
+    } else {
+      log.push(`${this.name} nie trafił.`);
+    }
+  }
+}
+
+
+const log = [];
+const names = [ "Baraka", "Jax", "Johnny Cage", "Kitana", "Kung Lao", "Liu Kang", "Mileena", "Raiden", "Reptile", "Scorpion", "Shang Tsung", "Sub-Zero"];
+const fighters = names.map(name => new Fighter(name));
+
+
+function getFighter() {
+  if (fighters.length > 0) {
+    const index = Math.floor(Math.random() * fighters.length);
+    return fighters.splice(index, 1)[0];
+  }
+  return null;
+}
+
+
+let leftFighter = null;
+let rightFighter = null;
+
+
+function loop() {
+  if (!leftFighter) leftFighter = getFighter();
+  if (!rightFighter) rightFighter = getFighter();
+
+  if (!leftFighter || !rightFighter) {
+    log.push("Turniej zakończony.");
+    return false;
+  }
+
+
+  if (Math.random() < 0.5) {
+    leftFighter.attack(rightFighter);
+  } else {
+    rightFighter.attack(leftFighter);
+  }
+
+
+  if (leftFighter.live <= 0) {
+    rightFighter.live = 20; // reset życia dla zwycięzcy
+    log.push(`${leftFighter.name} przegrał. ${rightFighter.name} wygrywa!`);
+    leftFighter = null;
+  }
+
+  if (rightFighter.live <= 0) {
+    leftFighter.live = 20;
+    log.push(`${rightFighter.name} przegrał. ${leftFighter.name} wygrywa!`);
+    rightFighter = null;
+  }
+
+  console.clear();
+  console.log(log.join('\n'));
+
+  setTimeout(() => loop(), 100);
+}
+
+loop();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	</script>
+
+</body>
+</html>
