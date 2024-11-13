@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>zadanie</title>
+</head>
+<body>
+<script type="text/javascript">
+
+class Vehicle {
+  constructor(make, model, year, mileage) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    this.mileage = mileage;
+  }
+
+  info() {
+    console.log(`Marka: ${this.make}`);
+    console.log(`Model: ${this.model}`);
+    console.log(`Rok produkcji: ${this.year}`);
+    console.log(`Przebieg: ${this.mileage} km`);
+  }
+}
+
+class Car extends Vehicle { 
+  constructor(make, model, year, mileage, numberOfDoors) {
+    super(make, model, year, mileage);
+    this.numberOfDoors = numberOfDoors;
+  }
+
+  info() {
+    super.info();
+    console.log(`Liczba drzwi: ${this.numberOfDoors}`);
+  }
+}
+
+class Truck extends Vehicle {
+  constructor(make, model, year, mileage, cargoCapacity) {
+    super(make, model, year, mileage);
+    this.cargoCapacity = cargoCapacity;
+  }
+
+  info() {
+    super.info();
+    console.log(`Ładowność: ${this.cargoCapacity} kg`);
+  }
+}
+
+const myCar = new Car('Opel', 'Astra', 2013, 54221, 4);
+const myTruck = new Truck('Iveco', 'NightlyXD', 2011, 854321 , 20000);
+
+
+myCar.info();
+myTruck.info();
+</script>
+</body>
+</html>
