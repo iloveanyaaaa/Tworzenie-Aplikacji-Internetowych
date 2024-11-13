@@ -1,0 +1,76 @@
+<html>
+    <head>
+        <title>dzejkenkuery 3</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="script.js"> </script>
+        <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 1080px;
+        background-color: #f0f0f0;
+        font-family: Arial, sans-serif;
+    }
+    
+    .slider-container {
+        width: 100%;
+        max-width: 600px;
+        overflow: hidden;
+        position: relative;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    .slider {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+    
+    .slide {
+        min-width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+    }
+    
+    .slide img {
+        width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+    
+    .prev, .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding: 10px;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        cursor: pointer;
+        font-size: 24px;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .prev { left: 10px; }
+    .next { right: 10px; }
+        </style>
+    </head>
+    <body>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide"><img src="https://www.rugbyafrique.com/wp-content/uploads/2020/09/600x600-1.jpg"></div>
+                <div class="slide"><img src="https://www.rugbyafrique.com/wp-content/uploads/2020/09/600x600-1.jpg"></div>
+                <div class="slide"><img src="https://www.rugbyafrique.com/wp-content/uploads/2020/09/600x600-1.jpg"></div>
+            </div>
+            <span class="prev">❮</span>
+            <span class="next">❯</span>
+        </div>
+    </body>
+</html>
