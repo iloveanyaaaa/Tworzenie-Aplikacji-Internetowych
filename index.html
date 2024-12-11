@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klocek Canvas</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: palevioletred;
+        }
+        canvas {
+            border: 1px solid palevioletred;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="gameCanvas" width="800" height="600"></canvas>
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const klocekWidth = 20;
+    const klocekHeight = 20;
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+    let klocekX = (canvasWidth - klocekWidth) / 2;
+    let klocekY = 0;
+    let klocekSpeed = 2;
+    let klocekMovingLeft = false;
+    let klocekMovingRight = false;
+    let isKlocekOnGround = false;
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft' && !isKlocekOnGround) klocekMovingLeft = true;
+        if (e.key === 'ArrowRight' && !isKlocekOnGround) klocekMovingRight = true;
+    });
+    document.addEventListener('keyup', (e) => //zatrzymuje klocka x)
+    {
+        if (e.key === 'ArrowLeft') klocekMovingLeft = false;
+        if (e.key === 'ArrowRight') klocekMovingRight = false;
+    });
+    function drawKlocek() {
+        ctx.fillStyle = 'palevioletred';
+        ctx.fillRect(klocekX, klocekY, klocekWidth, klocekHeight);
+    }
+    function updateKlocekPosition() {
+        if (!isKlocekOnGround) {
+            if (klocekMovingLeft && klocekX > 0) klocekX -= 5;
+            if (klocekMovingRight && klocekX < canvasWidth - klocekWidth) klocekX += 5;
+            klocekY += klocekSpeed;
+            if (klocekY > canvasHeight - klocekHeight) {
+                klocekY = canvasHeight - klocekHeight;
+                isKlocekOnGround = true;
+            }
+        }
+    }
+    function gameLoop() {
+        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+        updateKlocekPosition();
+        drawKlocek();
+        requestAnimationFrame(gameLoop);
+    }
+    gameLoop();
+</script>
+
+</body>
+</html>
