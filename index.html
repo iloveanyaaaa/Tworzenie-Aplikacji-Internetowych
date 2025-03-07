@@ -3,71 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Klocek Canvas</title>
+    <title>Formularz</title>
     <style>
         body {
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: palevioletred;
+            background-color: #f0f8ff;
+            font-family: Arial, sans-serif;
+            margin: 20px;
         }
-        canvas {
-            border: 1px solid palevioletred;
-            background-color: white;
+        form {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input[type="text"],
+        input[type="number"],
+        input[type="email"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="button"] {
+            background-color: #4CAF50;
+            color: white;
+        }
+        button[type="reset"] {
+            background-color: #f44336;
+            color: white;
+        }
+        .error {
+            color: red;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
+    <form id="formularz">
+        <label for="imie">Imię:</label>
+        <input type="text" id="imie" required>
 
-<canvas id="gameCanvas" width="800" height="600"></canvas>
-<script>
-    const canvas = document.getElementById('gameCanvas');
-    const ctx = canvas.getContext('2d');
-    const klocekWidth = 20;
-    const klocekHeight = 20;
-    const canvasWidth = canvas.width;
-    const canvasHeight = canvas.height;
-    let klocekX = (canvasWidth - klocekWidth) / 2;
-    let klocekY = 0;
-    let klocekSpeed = 2;
-    let klocekMovingLeft = false;
-    let klocekMovingRight = false;
-    let isKlocekOnGround = false;
+        <label for="nazwisko">Nazwisko:</label>
+        <input type="text" id="nazwisko" required>
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft' && !isKlocekOnGround) klocekMovingLeft = true;
-        if (e.key === 'ArrowRight' && !isKlocekOnGround) klocekMovingRight = true;
-    });
-    document.addEventListener('keyup', (e) => //zatrzymuje klocka x)
-    {
-        if (e.key === 'ArrowLeft') klocekMovingLeft = false;
-        if (e.key === 'ArrowRight') klocekMovingRight = false;
-    });
-    function drawKlocek() {
-        ctx.fillStyle = 'palevioletred';
-        ctx.fillRect(klocekX, klocekY, klocekWidth, klocekHeight);
-    }
-    function updateKlocekPosition() {
-        if (!isKlocekOnGround) {
-            if (klocekMovingLeft && klocekX > 0) klocekX -= 5;
-            if (klocekMovingRight && klocekX < canvasWidth - klocekWidth) klocekX += 5;
-            klocekY += klocekSpeed;
-            if (klocekY > canvasHeight - klocekHeight) {
-                klocekY = canvasHeight - klocekHeight;
-                isKlocekOnGround = true;
-            }
+        <label for="wiek">Wiek:</label>
+        <input type="number" id="wiek" required>
+
+        <label for="email">Adres e-mail:</label>
+        <input type="email" id="email" required>
+
+        <label for="ulica">Ulica:</label>
+        <input type="text" id="ulica" required>
+
+        <label for="nr_domu">Numer domu:</label>
+        <input type="text" id="nr_domu" required>
+
+        <label for="nr_mieszkania">Numer mieszkania (opcjonalne):</label>
+        <input type="text" id="nr_mieszkania">
+
+        <label for="kod">Kod pocztowy:</label>
+        <input type="text" id="kod" required>
+
+        <label for="miasto">Miasto:</label>
+        <input type="text" id="miasto" required>
+
+        <button type="button" onclick="sprawdzFormularz()">Wyślij</button>
+        <button type="reset">Reset</button>
+    </form>
+    <div id="wynik" class="error"></div>
+
+    <script>
+        function sprawdzFormularz() {
+            let blad = "";
+            let imie = document.getElementById("imie").value;
+            let nazwisko = document.getElementById("nazwisko").value;
+            let wiek = document.getElementById("wiek").value;
+            let email = document.getElementById("email").value;
+            let ulica = document.getElementById("ulica").value;
+            let nr_domu = document.getElementById("nr_domu").value;
+            let nr_mieszkania = document.getElementById("nr_mieszkania").value;
+            let kod = document.getElementById("kod").value;
+            let miasto = document.getElementById("miasto").value;
+            
+            let regexImieNazwiskoMiasto = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-ząćęłńóśźż]+$/;
+            let regexEmail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|pl|org)$/;
+            let regexUlica = /^[A-ZĄĆĘŁŃÓŚŹŻ][a-zA-Ząćęłńóśźż ]+$/;
+            let regexNrDomu = /^\d+.*$/;
+            let regexKod = /^\d{2}-\d{3}$/;
+            
+            if (!regexImieNazwiskoMiasto.test(imie)) blad += "Imię musi zaczynać się wielką literą.<br>";
+            if (!regexImieNazwiskoMiasto.test(nazwisko)) blad += "Nazwisko musi zaczynać się wielką literą.<br>";
+            if (wiek < 18 || isNaN(wiek)) blad += "Wiek musi być liczbą i wynosić co najmniej 18 lat.<br>";
+            if (!regexEmail.test(email)) blad += "Niepoprawny adres e-mail.<br>";
+            if (!regexUlica.test(ulica)) blad += "Ulica musi zaczynać się wielką literą.<br>";
+            if (!regexNrDomu.test(nr_domu)) blad += "Numer domu musi zaczynać się od cyfry.<br>";
+            if (kod && !regexKod.test(kod)) blad += "Kod pocztowy musi mieć format XX-XXX.<br>";
+            if (!regexImieNazwiskoMiasto.test(miasto)) blad += "Miasto musi zaczynać się wielką literą.<br>";
+            
+            document.getElementById("wynik").innerHTML = blad || "Formularz przesłany poprawnie.";
         }
-    }
-    function gameLoop() {
-        ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-        updateKlocekPosition();
-        drawKlocek();
-        requestAnimationFrame(gameLoop);
-    }
-    gameLoop();
-</script>
-
-</body>
-</html>
+    </script>
