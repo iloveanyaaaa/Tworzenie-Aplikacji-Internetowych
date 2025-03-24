@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamiczny Formularz</title>
+    <style>
+        .email-field {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formularz</h1>
+    <form id="dynamicForm">
+        <label for="firstName">Imię:</label>
+        <input type="text" id="firstName" required><br>
+
+        <label for="lastName">Nazwisko:</label>
+        <input type="text" id="lastName" required><br>
+
+        <label for="age">Wiek:</label>
+        <input type="number" id="age" required><br>
+
+        <label for="userType">Typ użytkownika:</label>
+        <select id="userType">
+            <option value="osoba">Osoba fizyczna</option>
+            <option value="firma">Firma</option>
+        </select><br>
+
+        <div id="nipField" style="display: none;">
+            <label for="nip">NIP:</label>
+            <input type="text" id="nip"><br>
+        </div>
+
+        <div id="emailContainer">
+            <label>Adresy e-mail:</label>
+            <div class="email-field">
+                <input type="email" class="email" required>
+                <button type="button" class="removeEmail">Usuń</button>
+            </div>
+        </div>
+        <button type="button" id="addEmail">Dodaj e-mail</button><br><br>
+
+        <button type="button" id="saveButton">Zapisz</button>
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
